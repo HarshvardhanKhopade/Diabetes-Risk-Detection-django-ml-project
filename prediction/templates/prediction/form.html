@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diabetes Risk Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diabetes Risk Detection</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="gender">Gender:</label>
+        <select name="gender" id="gender">
+            {% for gender in gender_categories %}
+                <option value="{{ gender }}">{{ gender }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="age">Age:</label>
+        <input type="number" name="age" id="age" min="1" max="110" value="40">
+
+        <label for="hypertension">Hypertension:</label>
+        <input type="number" name="hypertension" id="hypertension" min="0" max="1">
+
+        <label for="heart_disease">Heart Disease:</label>
+        <input type="number" name="heart_disease" id="heart_disease" min="0" max="1">
+
+        <label for="smoking_history">Smoking History:</label>
+        <select name="smoking_history" id="smoking_history">
+            {% for history in smoking_history_options %}
+                <option value="{{ history }}">{{ history }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="bmi">BMI:</label>
+        <input type="number" name="bmi" id="bmi" min="10.0" max="96.0" step="0.1" value="27.0">
+
+        <label for="hemoglobin_level">HbA1c Level:</label>
+        <input type="number" name="hemoglobin_level" id="hemoglobin_level" min="3.5" max="9.0" step="0.1" value="5.5">
+
+        <label for="blood_glucose_level">Blood Glucose Level:</label>
+        <input type="number" name="blood_glucose_level" id="blood_glucose_level" min="80" max="300" value="138">
+
+        <button type="submit">Detect</button>
+    </form>
+</body>
+</html>
